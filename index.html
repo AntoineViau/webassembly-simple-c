@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+
+    <script async type="text/javascript" src="simple-c.js"></script>
+
+    <script type="text/javascript">
+
+        var Module = {
+            onRuntimeInitialized: () => {
+                let doSomething = Module._doSomething;
+                let str = 'abcd';
+                let ptr  = Module.allocate(Module.intArrayFromString(str), 'i8', ALLOC_NORMAL);
+                console.log('ptr',ptr);
+                let retPtr = doSomething(ptr, str.length);
+                console.log('retPtr',retPtr);
+                let resValue = Module.Pointer_stringify(retPtr);
+                Module._free(ptr);   
+                console.log(resValue);
+            },
+            print: console.log,
+            printErr: console.log
+        }
+
+    </script>
+
+</body>
+
+</html>
